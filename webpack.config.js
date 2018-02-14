@@ -86,11 +86,10 @@ module.exports = (env = {}) => {
                 presets: [
                   '@babel/preset-react',
                   ['@babel/preset-env', {
-                    debug: false,
+                    debug: true,
                     modules: false,
                     shippedProposals: true,
-                    targets: { browsers: ['last 2 versions'] },
-                    useBuiltIns: 'usage',
+                    targets: { browsers: ['last 2 versions', "IE >= 11"] },
                   }],
                 ],
                 cacheDirectory: 'tmp/babel-cache',
