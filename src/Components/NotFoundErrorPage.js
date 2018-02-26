@@ -7,7 +7,7 @@ class NotFoundErrorPage extends React.Component {
     const needsRedirect = window.location.pathname !== '/404';
 
     if (needsRedirect) {
-      window.location.replace(`/404`);
+      window.location.replace(`/404?${encodeURIComponent(window.location.pathname)}`);
     }
   }
 
