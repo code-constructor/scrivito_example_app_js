@@ -8,7 +8,7 @@ import Intercom from './Components/Intercom';
 import Navigation from './Components/Navigation';
 import NotFoundErrorPage from './Components/NotFoundErrorPage';
 
-export default function App() {
+function ScrivitoApp() {
   return (
     <ErrorBoundary>
       <div>
@@ -24,4 +24,53 @@ export default function App() {
       </div>
     </ErrorBoundary>
   );
+}
+
+function ExternalApp({ path }) {
+  return (
+    <div>
+      EXTERNAL APP
+      <br />
+      { path }
+      <a href="/">TO ROOT</a>
+      <a href="/2-external-app">TO 2. External App</a>
+    </div>
+  );
+}
+
+export default class App extends React.Component {
+  componentDidMount() {
+    this.props.history.listen((location, action) => {
+      if (action === 'POP') {
+        this.setState({ location: location.pathname });
+      }
+
+      if (action === 'REPLACE') {
+        this.setState({ location: location.pathname });
+      }
+
+      if (action === 'PUSH') {
+        this.setState({ location: location.pathname });
+      }
+    });
+
+    this.setState({ location: this.props.history.location });
+  }
+
+  render() {
+    if (!this.state || !this.state.location) {
+      return null;
+    }
+
+    if (this.state.location.pathname === '/external-app') {
+      return <ExternalApp path={ this.state.location.pathname }/>;
+    }
+
+    if (this.state.location.pathname === '/2-external-app') {
+      return <ExternalApp path={ this.state.location.pathname }/>;
+    }
+
+    return <ScrivitoApp />;
+  }
+
 }

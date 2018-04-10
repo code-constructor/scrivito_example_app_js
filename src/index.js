@@ -1,9 +1,14 @@
 import './polyfills';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { createBrowserHistory } from 'history';
 import './Objs';
 import './Widgets';
 import App from './App';
 import './config';
 
-ReactDOM.render(<App />, document.getElementById('application'));
+const history = createBrowserHistory();
+
+Scrivito.useHistory(history);
+
+ReactDOM.render(<App history={ history } />, document.getElementById('application'));
